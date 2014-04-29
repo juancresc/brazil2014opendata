@@ -6,16 +6,6 @@ Teams, matches, places and groups in MySQL
 Or you can copy this
 
 
---
--- Database: `mundial`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `FootballMatch`
---
-
 CREATE TABLE IF NOT EXISTS `FootballMatch` (
   `id_footballMatch` int(11) NOT NULL AUTO_INCREMENT,
   `time` time NOT NULL,
@@ -32,9 +22,6 @@ CREATE TABLE IF NOT EXISTS `FootballMatch` (
   KEY `fk_footballMarch_round` (`round`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
 
---
--- Dumping data for table `FootballMatch`
---
 
 INSERT INTO `FootballMatch` (`id_footballMatch`, `time`, `date`, `team1`, `team2`, `number`, `round`, `place`) VALUES
 (2, '21:00:00', '2014-06-12', 6, 11, 1, 1, 12),
@@ -86,11 +73,6 @@ INSERT INTO `FootballMatch` (`id_footballMatch`, `time`, `date`, `team1`, `team2
 (48, '21:00:00', '2014-07-26', 23, 4, 47, 1, 12),
 (49, '21:00:00', '2014-07-26', 1, 28, 48, 1, 4);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `Place`
---
 
 CREATE TABLE IF NOT EXISTS `Place` (
   `id_place` int(11) NOT NULL AUTO_INCREMENT,
@@ -98,9 +80,6 @@ CREATE TABLE IF NOT EXISTS `Place` (
   PRIMARY KEY (`id_place`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
---
--- Dumping data for table `Place`
---
 
 INSERT INTO `Place` (`id_place`, `name`) VALUES
 (1, 'Belo Horizonte'),
@@ -116,11 +95,6 @@ INSERT INTO `Place` (`id_place`, `name`) VALUES
 (11, 'Salvador'),
 (12, 'Sao Paulo');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `Result`
---
 
 CREATE TABLE IF NOT EXISTS `Result` (
   `id_result` int(11) NOT NULL AUTO_INCREMENT,
@@ -132,18 +106,10 @@ CREATE TABLE IF NOT EXISTS `Result` (
   KEY `fk_result_footballMatch` (`footballMatch`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
---
--- Dumping data for table `Result`
---
 
 INSERT INTO `Result` (`id_result`, `footballMatch`, `team1score`, `team2score`, `active`) VALUES
 (1, 2, 1, 4, 1);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `Round`
---
 
 CREATE TABLE IF NOT EXISTS `Round` (
   `id_round` int(11) NOT NULL AUTO_INCREMENT,
@@ -152,9 +118,6 @@ CREATE TABLE IF NOT EXISTS `Round` (
   PRIMARY KEY (`id_round`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
---
--- Dumping data for table `Round`
---
 
 INSERT INTO `Round` (`id_round`, `name`, `enabled`) VALUES
 (1, 'Etapa de Grupos', 1),
@@ -164,11 +127,6 @@ INSERT INTO `Round` (`id_round`, `name`, `enabled`) VALUES
 (5, 'Tercer y cuarto puesto', 0),
 (6, 'Final', 0);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `Team`
---
 
 CREATE TABLE IF NOT EXISTS `Team` (
   `id_team` int(11) NOT NULL AUTO_INCREMENT,
@@ -178,9 +136,6 @@ CREATE TABLE IF NOT EXISTS `Team` (
   KEY `fk_team_teamGroup` (`teamGroup`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
---
--- Dumping data for table `Team`
---
 
 INSERT INTO `Team` (`id_team`, `name`, `teamGroup`) VALUES
 (1, 'Algeria', 8),
@@ -216,11 +171,6 @@ INSERT INTO `Team` (`id_team`, `name`, `teamGroup`) VALUES
 (31, 'Uruguay', 4),
 (32, 'USA', 7);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `TeamGroup`
---
 
 CREATE TABLE IF NOT EXISTS `TeamGroup` (
   `id_teamGroup` int(11) NOT NULL AUTO_INCREMENT,
@@ -228,9 +178,6 @@ CREATE TABLE IF NOT EXISTS `TeamGroup` (
   PRIMARY KEY (`id_teamGroup`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
---
--- Dumping data for table `TeamGroup`
---
 
 INSERT INTO `TeamGroup` (`id_teamGroup`, `name`) VALUES
 (1, 'A'),
@@ -242,31 +189,15 @@ INSERT INTO `TeamGroup` (`id_teamGroup`, `name`) VALUES
 (7, 'G'),
 (8, 'H');
 
---
--- Constraints for dumped tables
---
 
---
--- Constraints for table `FootballMatch`
---
 ALTER TABLE `FootballMatch`
   ADD CONSTRAINT `fk_footballMarch_place` FOREIGN KEY (`place`) REFERENCES `Place` (`id_place`),
   ADD CONSTRAINT `fk_footballMarch_round` FOREIGN KEY (`round`) REFERENCES `Round` (`id_round`),
   ADD CONSTRAINT `fk_footballMarch_team1` FOREIGN KEY (`team1`) REFERENCES `Team` (`id_team`),
   ADD CONSTRAINT `fk_footballMarch_team2` FOREIGN KEY (`team2`) REFERENCES `Team` (`id_team`);
 
---
--- Constraints for table `Result`
---
 ALTER TABLE `Result`
   ADD CONSTRAINT `fk_result_footballMatch` FOREIGN KEY (`footballMatch`) REFERENCES `FootballMatch` (`id_footballMatch`);
 
---
--- Constraints for table `Team`
---
 ALTER TABLE `Team`
   ADD CONSTRAINT `fk_team_teamGroup` FOREIGN KEY (`teamGroup`) REFERENCES `TeamGroup` (`id_teamGroup`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
