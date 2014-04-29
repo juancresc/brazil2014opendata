@@ -3,6 +3,8 @@ brazil2014opendata
 
 Teams, matches, places and groups in MySQL
 
+CAREFUL: First insert groups, places, then teams and finally matches :)
+
 Or you can copy this
 
 ```
