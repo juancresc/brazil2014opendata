@@ -5,6 +5,7 @@ Teams, matches, places and groups in MySQL
 
 Or you can copy this
 
+```
 
 CREATE TABLE IF NOT EXISTS `FootballMatch` (
   `id_footballMatch` int(11) NOT NULL AUTO_INCREMENT,
@@ -201,3 +202,5 @@ ALTER TABLE `Result`
 
 ALTER TABLE `Team`
   ADD CONSTRAINT `fk_team_teamGroup` FOREIGN KEY (`teamGroup`) REFERENCES `TeamGroup` (`id_teamGroup`);
+
+```
